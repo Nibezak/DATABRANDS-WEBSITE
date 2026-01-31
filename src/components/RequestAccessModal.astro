@@ -1,0 +1,95 @@
+---
+import { getUI, getLocale } from '~/utils/i18n'
+
+const locale = getLocale(Astro)
+const {
+  components: {
+    nav: { menu },
+  },
+} = getUI(locale)
+---
+
+<dialog
+  id="request-access-dialog"
+  class="fixed inset-0 z-50 bg-transparent p-0 backdrop:bg-black/80"
+>
+  <div class="fixed inset-0 flex items-center justify-center p-4">
+    <div
+      class="relative w-full max-w-3xl bg-paper p-16 text-center shadow-2xl ring-1 ring-white/10"
+      id="request-access-content"
+    >
+      <button
+        onclick="document.getElementById('request-access-dialog').close()"
+        class="absolute right-6 top-6 font-junicode text-3xl leading-none text-white transition-opacity hover:opacity-60"
+        aria-label="Close"
+      >
+        &times;
+      </button>
+
+      <h3 class="mb-6 font-junicode text-5xl font-bold italic text-white">Request Access</h3>
+      <p class="mb-12 font-junicode text-2xl leading-relaxed text-white/90">
+        "To join the beta, please join the club."
+        <br />
+        <span class="font-sans mt-4 block text-lg not-italic text-white/60">
+          Head over to our <strong>Discord</strong> and find the <br />
+          <code class="font-mono rounded bg-white/10 px-2 py-1 text-sm text-white"
+            >#request-access</code
+          > topic.
+        </span>
+      </p>
+
+      <a
+        href="https://discord.gg/4NSueBdW"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group relative inline-flex items-center justify-center overflow-hidden border border-white bg-transparent px-10 py-4 font-semibold text-white transition-all duration-300 hover:bg-white hover:text-black"
+      >
+        <span class="relative z-10">Join Discord</span>
+      </a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('request-access-dialog') as HTMLDialogElement
+  const triggers = document.querySelectorAll('.trigger-request-access')
+
+  function openModal(e: Event) {
+    e.preventDefault()
+    dialog?.showModal()
+  }
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', openModal)
+  })
+
+  // Close when clicking backdrop
+  dialog?.addEventListener('click', e => {
+    const dialogDimensions = dialog.getBoundingClientRect()
+    if (
+      e.clientX < dialogDimensions.left ||
+      e.clientX > dialogDimensions.right ||
+      e.clientY < dialogDimensions.top ||
+      e.clientY > dialogDimensions.bottom
+    ) {
+      dialog.close()
+    }
+  })
+</script>
+
+<style>
+  dialog[open] {
+    animation: fade-in 0.3s ease-out;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+</style>

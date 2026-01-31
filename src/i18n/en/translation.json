@@ -1,0 +1,346 @@
+{
+  "routes": {
+    "index": {
+      "title": "DATABRANDS",
+      "hero": {
+        "title": [
+          { "text": "Run your ", "highlight": false },
+          { "text": "Social media ", "highlight": false },
+          { "text": "\n", "highlight": false },
+          { "text": "on ", "highlight": false },
+          { "text": "vibes", "highlight": false, "underline": true }
+        ],
+        "description": [
+          "AI-powered social management, analytics, and content creation.",
+          "\"Run your social Media on vibes \""
+        ],
+        "buttons": {
+          "beta": "Request Access",
+          "support": "Log into your account"
+        }
+      },
+      "features": {
+        "titles": ["Master ", "your ", "Presence"],
+        "description": "DATABRANDS is built for creators and brands who need clarity in the chaos. It's not just a tool; it's your command center for the attention economy.",
+        "featureTabs": {
+          "workspaces": {
+            "title": "Platform Analytics",
+            "description": "Unified growth dashboard for all your channels."
+          },
+          "compactMode": {
+            "title": "Creative Canvas",
+            "description": "Distraction-free space for deep creative work."
+          },
+          "glance": {
+            "title": "Social Listening",
+            "description": "Real-time monitoring of trends and sentiment."
+          },
+          "splitView": {
+            "title": "Schedule Posts",
+            "description": "Multi-platform scheduling and publishing."
+          }
+        }
+      },
+      "sponsors": {
+        "title": "Our Partners",
+        "description": "We are grateful to our partners for their support. They help us keep the vision alive.<br />You can also be part of this journey by <a href=\"/pricing\" class=\"zen-link\">viewing our plans</a>!",
+        "sponsors": {
+          "tuta": {
+            "name": "Tuta",
+            "url": "https://tuta.com/"
+          },
+          "blacksmith": {
+            "name": "BlackSmith",
+            "url": "https://www.blacksmith.sh/"
+          },
+          "crowdin": {
+            "name": "Crowdin",
+            "url": "https://crowdin.com/"
+          }
+        }
+      },
+      "community": {
+        "title": ["Our ", "Core ", "Values"],
+        "description": "We make it a necessity to ensure DATABRANDS empowers you to own your digital destiny with performance, privacy, and power.",
+        "lists": {
+          "freeAndOpenSource": {
+            "title": "Creator First",
+            "description": "DATABRANDS puts the creator first, ensuring you own your data, your audience, and your creative output."
+          },
+          "simpleYetPowerful": {
+            "title": "Simple yet Deep",
+            "description": "DATABRANDS is intuitive for beginners, but offers depth and programmability for power users and agencies."
+          },
+          "privateAndAlwaysUpToDate": {
+            "title": "Private and Secure",
+            "description": "Your strategies and unreleased content are yours. DATABRANDS is built with privacy-first architecture."
+          }
+        },
+        "images": {
+          "community": {
+            "alt": "Community"
+          }
+        }
+      }
+    },
+
+    "about": {
+      "title": "About DATABRANDS",
+      "description": "At DATABRANDS, we believe that your digital presence is more than just metrics—it's an extension of your creative soul. in a world obsessed with algorithms and engagement traps, we are building a sanctuary for creators who want to reclaim their time and their voice.\n\nWe started this journey with a simple question: What if social media management felt less like a chore and more like an art form? What if your tools didn't just track numbers, but actually understood the vibe you're trying to curate?\n\nDATABRANDS is our answer. It is a declaration of independence from the chaos of the attention economy. We are not just building software; illustration of a new way to work—one where privacy, performance, and power coexist. We are a small, dedicated team of dreamers and doers who refuse to compromise on quality or ethics. We in transparency, and in the power of the community. \n\nWhether you are a solo creator just starting out or a seasoned brand manager scaling an empire, DATABRANDS is designed to be your steadfast companion. We are here to help you cut through the noise, focus on what matters, and build something that truly lasts. Welcome to the future of brand management. Welcome to DATABRANDS.",
+      "littleHelp": "A little help?",
+      "mainTeam": {
+        "title": "The Team",
+        "description": "Building the future of brand management.",
+        "members": [
+          {
+            "name": "Nibeza Kevin",
+            "description": "Founder & Lead Developer",
+            "link": "https://github.com/nibezakevin"
+          }
+        ]
+      },
+      "contributors": {
+        "title": "Contributors",
+        "description": "This list shows the contributors who have helped us to make DATABRANDS the best it can be.",
+        "browser": "Core",
+        "website": "Web"
+      }
+    },
+    "pricing": {
+      "title": "Pricing",
+      "description": "Transparent pricing for every stage of your journey. Choose the plan that fits your growth.",
+      "patreon": {
+        "title": "Starter",
+        "description": "$99 / month. Perfect for individual creators and small teams starting their brand journey.",
+        "button": "Get Starter"
+      },
+      "koFi": {
+        "title": "Enterprise",
+        "description": "Custom solutions for large organizations. Contact us for a quote.",
+        "button": "Contact Us"
+      }
+    },
+    "download": {
+      "title": "Start your journey",
+      "description": "Download DATABRANDS for your platform and experience a more mindful creative workflow.<br/>DATABRANDS is available for macOS, Windows, and Linux.",
+      "twilightInfo": "You're currently in Twilight mode, this means you're downloading the latest experimental features and updates.",
+      "beta": "DATABRANDS is currently in ",
+      "otherDownload": "If your device has been wrongly detected, <a href='https://github.com/zen-browser/desktop/releases/latest/' class='zen-link'>see other downloads</a>.<br />Please report any issues you encounter on <a href='https://github.com/zen-browser/desktop/issues/new/choose' class='zen-link ml-[1px]'>GitHub</a>.",
+      "alertInfo": {
+        "description": "You're currently in Twilight mode, this means you're downloading the latest experimental features and updates."
+      },
+      "platformSelector": {
+        "title": "Platform Selector",
+        "description": "Select your platform to download DATABRANDS."
+      },
+      "additionalResources": {
+        "title": "Additional Resources",
+        "sourceCode": {
+          "title": "Source Code",
+          "description": "Explore DATABRANDS's source code on GitHub. Contribute to the project or build your own version."
+        },
+        "documentation": {
+          "title": "Documentation",
+          "description": "Access comprehensive documentation, guides, and tutorials for DATABRANDS."
+        }
+      },
+      "securityNotice": {
+        "title": "Verified & Secure Downloads",
+        "description": "All DATABRANDS downloads are signed and verified for your security. We recommend downloading directly from our official website or GitHub repository. If your download seems broken or gets flagged by your antivirus, please <a href='https://github.com/zen-browser/desktop/issues/new/choose' class='zen-link ml-1'>report it to us</a>."
+      },
+      "platformNames": {
+        "mac": "macOS",
+        "windows": "Windows",
+        "linux": "Linux"
+      },
+      "platformDescriptions": {
+        "mac": "Works on both new Apple (M-Series) and older Intel Macs.<br />Requires macOS 11.0 or later.",
+        "windows": "Works on Windows 10 and Windows 11.<br />Not sure which version to get? Most people should choose the 64-bit installer.",
+        "linux": "Works with many Linux versions.<br />Pick the download that matches your system."
+      },
+      "links": {
+        "macos": { "universal": "Universal" },
+        "windows": { "64bit": "64-bit (Recommended)", "ARM64": "ARM64" },
+        "linux": {
+          "flathub": "Flathub",
+          "x86_64": "Tarball",
+          "aarch64": "Tarball"
+        }
+      },
+      "buttonCard": {
+        "copy": "Copy",
+        "showChecksum": "Show SHA-256",
+        "beta": "Beta"
+      }
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: 2025-02-5",
+      "sections": {
+        "introduction": {
+          "title": "Introduction",
+          "body": "Welcome to DATABRANDS! Your privacy is our priority. This Privacy Policy outlines the types of personal information we collect, how we use it, and the steps we take to protect your data when you use DATABRANDS.",
+          "summary": "We don't sell data - We don't collect data - We don't track you"
+        },
+        "noCollect": {
+          "title": "1. Information We Do Not Collect",
+          "body": "DATABRANDS is designed with privacy in mind. We do not collect, store, or share any of your personal data. Here's what that means:"
+        },
+        "noTelemetry": {
+          "title": "1.1. No Telemetry",
+          "body": "We do not collect any telemetry data or crash reports.",
+          "body2": "DATABRANDS has stripped out telemetry. We have removed all telemetry data collection and crash reports."
+        },
+        "noPersonalData": {
+          "title": "1.2. No Personal Data Collection",
+          "body": "DATABRANDS does not collect any personal information such as your IP address, browsing history, search queries, or form data."
+        },
+        "noThirdParty": {
+          "title": "1.3. No Third-Party Tracking",
+          "body": "We do not allow third-party trackers or analytics tools to operate within DATABRANDS. Your activity remains entirely private."
+        },
+        "externalConnections": {
+          "title": "1.4. External connections made at startup",
+          "body": "DATABRANDS may make external connections at startup to check for updates and ensure the system is up to date on plugins, addons, check for connectivity and Geolocation/push notifications services. We do not collect any data from these connections, but they may be logged by third-party services or websites you visit."
+        },
+        "localStorage": {
+          "title": "2. Information Stored Locally on Your Device"
+        },
+        "browsingData": {
+          "title": "2.1. Local Data",
+          "body": "DATABRANDS stores certain data locally on your device to enhance your experience. This includes:"
+        },
+        "cookies": {
+          "title": "Cookies",
+          "body": "Cookies are stored locally on your device and are not shared with DATABRANDS or any third party. You have full control over the management of cookies through the settings."
+        },
+        "cache": {
+          "title": "Cache and Temporary Files",
+          "body": "DATABRANDS may store cache files and other temporary data locally to improve performance. These files can be cleared at any time through the settings."
+        },
+        "settings": {
+          "title": "2.2. Settings and Preferences",
+          "body": "Any customizations, settings, and preferences you make within DATABRANDS are stored locally on your device. We do not have access to or control over this data."
+        },
+        "sync": {
+          "title": "3. Sync Feature",
+          "body": "DATABRANDS offers a \"Sync\" feature. This feature allows you to synchronize your bookmarks, history, passwords, and other data across multiple devices. For this feature to work, your data is encrypted and stored on secure servers and is treated in accordance with strict Privacy Policy. We, at DATABRANDS, cannot view any of this data.",
+          "link1": "Sync",
+          "link2": "This is how we store your passwords"
+        },
+        "addons": {
+          "title": "4. Add-ons and \"Plugins\"",
+          "body": "You can install Add-ons. DATABRANDS periodically checks for updates to these Add-ons.\nYou can also install \"Plugins\" from our library. These Plugins are hosted by our services and follow the same privacy policy our website. We do not collect any data from these Plugins, they are purely static content that is downloaded to your device."
+        },
+        "security": {
+          "title": "5. Data Security",
+          "body": "Although DATABRANDS does not collect your data, we are committed to protecting the information that is stored locally on your device. We recommend that you use secure passwords, enable device encryption, and regularly update your software to ensure your data remains safe.",
+          "note": "Note that we prioritize security at every level."
+        },
+        "control": {
+          "title": "6. Your Control",
+          "deletionTitle": "6.1. Data Deletion",
+          "deletionBody": "You have full control over all data stored locally on your device by DATABRANDS. You can clear your data, cookies, and cache at any time using the settings."
+        },
+        "website": {
+          "title": "7. Our Website and Services",
+          "body": "DATABRANDS's website and services do not use any third-party analytics, tracking, or CDN services. We do not collect any personal information from users visiting our website.",
+          "externalLinksTitle": "7.1. External links",
+          "externalLinksBody": "DATABRANDS may contain links to external websites or services that are not owned or operated by us. We are not responsible for the content or privacy practices of these sites. We recommend that you review the privacy policies of these sites before providing them with any personal information."
+        },
+        "changes": {
+          "title": "8. Changes to This Privacy Policy",
+          "body": "We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any significant changes by updating the effective date at the top of this policy. Continued use of DATABRANDS after such changes constitutes your acceptance of the new terms."
+        },
+        "otherTelemetry": {
+          "title": "9. Other telemetry",
+          "body": "We try to disable all telemetry data collection in DATABRANDS.",
+          "firefoxPrivacyNotice": "Privacy Notice",
+          "forMoreInformation": "for more information."
+        },
+        "contact": {
+          "title": "10. Contact Us",
+          "body": "If you have any questions or concerns about this Privacy Policy or DATABRANDS, please contact us at:",
+          "discord": "Discord: ",
+          "discordLink": "DATABRANDS's Discord",
+          "github": "GitHub: ",
+          "githubLink": "Organization"
+        }
+      }
+    },
+    "welcome": {
+      "title": ["Welcome ", "to ", "DATABRANDS!"]
+    },
+
+    "notFound": {
+      "title": "Page Not Found",
+      "description": "Sorry, the page you are looking for does not exist or has been moved.",
+      "button": "Go Home"
+    }
+  },
+  "layout": {
+    "index": {
+      "title": "DATABRANDS",
+      "description": "AI-powered brand operating system."
+    },
+
+    "about": {
+      "title": "About DATABRANDS",
+      "description": "We are a group of creators and developers who believe in the power of ownership."
+    },
+    "pricing": {
+      "title": "Pricing - DATABRANDS",
+      "description": "Transparent pricing for every stage of your journey. Choose the plan that fits your growth."
+    },
+    "download": {
+      "title": "Download - DATABRANDS",
+      "description": "Download DATABRANDS for your platform and experience a more mindful creative workflow."
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy - DATABRANDS",
+      "description": "Your privacy is our priority. This Privacy Policy outlines the types of personal information we collect, how we use it, and the steps we take to protect your data when you use DATABRANDS."
+    },
+    "welcome": {
+      "title": "Welcome!",
+      "description": "Welcome to DATABRANDS!"
+    }
+  },
+  "components": {
+    "footer": {
+      "title": "DATABRANDS",
+      "description": "AI-powered brand operating system. We care about your experience, not your data.",
+      "download": "Download",
+      "followUs": "Follow Us",
+      "aboutUs": "About Us",
+      "teamAndContributors": "Team & Contributors",
+      "privacyPolicy": "Privacy Policy",
+      "getStarted": "Get Started",
+      "documentation": "Documentation",
+      "requestAccess": "Request Access",
+      "login": "Log into your account",
+
+      "getHelp": "Get Help",
+      "email": "Email: nibeza@trydatabrands.com",
+      "securtiy": "Security",
+      "discord": "Discord",
+      "uptimeStatus": "Uptime Status",
+      "reportAnIssue": "Report an Issue",
+      "twilight": "Twilight",
+      "madeWith": "Made with <span aria-label='love'>❤️</span> by the <a href='{link}' class='zen-link inline-block font-bold'>DATABRANDS Team</a>"
+    },
+    "nav": {
+      "brand": "DATABRANDS",
+      "menu": {
+        "discord": "Discord",
+        "usefulLinks": "Resources",
+        "aboutUs": "About Us 🌟",
+        "aboutUsDesc": "Learn more about the team behind DATABRANDS.",
+        "watchVideos": "Watch Videos",
+        "watchVideosDesc": "Explore our latest tutorials and demos on YouTube.",
+        "download": "Request Access",
+        "menu": "Menu",
+        "login": "Log into your account"
+      }
+    }
+  }
+}

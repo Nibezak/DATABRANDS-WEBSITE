@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets'
+import Description from '~/components/Description.astro'
+import Layout from '~/layouts/Layout.astro'
+import { getLocale, getUI } from '~/utils/i18n'
+export { getStaticPaths } from '~/utils/i18n'
+import Button from '~/components/Button.astro'
+
+const locale = getLocale(Astro)
+
+const {
+  routes: { about },
+  layout,
+} = getUI(locale)
+---
+
+<Layout title={layout.about.title} description={layout.about.description}>
+  <main class="container flex min-h-screen w-full flex-col items-center gap-24 py-24 text-center">
+    <div class="flex w-full flex-col items-center gap-6">
+      <Description class="font-junicode text-6xl font-bold italic leading-none opacity-90"
+        >{about.title}</Description
+      >
+      <Description
+        class="max-w-4xl whitespace-pre-wrap text-justify font-junicode text-2xl italic leading-relaxed opacity-90"
+      >
+        {about.description}
+      </Description>
+      <div class="mt-8 flex w-full max-w-4xl justify-end pr-12">
+        <div
+          class="rotate- [-6deg] font-['Great_Vibes'] text-6xl opacity-80"
+          style="font-family: 'Great Vibes', cursive;"
+        >
+          Nibeza Kevin
+        </div>
+      </div>
+    </div>
+    <div class="flex w-full flex-col items-center gap-4">
+      <div class="text-4xl font-bold leading-none lg:text-5xl">{about.mainTeam.title}</div>
+      <Description>
+        {about.mainTeam.description}
+      </Description>
+      <div class="flex flex-col gap-6 pt-8">
+        <ul class="flex flex-col gap-2">
+          {
+            (about.mainTeam.members as any[]).map(member => (
+              <li class="text-lg">
+                {member.link && typeof member.link === 'string' ? (
+                  <a href={member.link}>
+                    <strong class="zen-link font-bold">{member.name}</strong>
+                  </a>
+                ) : (
+                  <strong class="font-bold">{member.name}</strong>
+                )}
+                <div class="text-sm opacity-80">{member.description}</div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+</style>

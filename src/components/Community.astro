@@ -1,0 +1,200 @@
+---
+import Image from 'astro/components/Image.astro'
+import AnalyticsPreview from '../assets/analytics-preview.png'
+import Button from '~/components/Button.astro'
+import CheckIcon from '~/icons/CheckIcon.astro'
+import GitHubIcon from '~/icons/GitHubIcon.astro'
+import { getLocale, getUI } from '~/utils/i18n'
+
+const locale = getLocale(Astro)
+
+const {
+  routes: {
+    index: { community },
+  },
+} = getUI(locale)
+---
+
+<section
+  id="community"
+  class="relative flex w-full flex-col items-center gap-6 py-12 text-start md:text-center lg:py-36"
+>
+  <h2 class="mb-2 text-4xl font-bold sm:text-6xl">
+    {
+      community.title.map(title =>
+        title !== '\n' ? (
+          <span style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)">
+            {title}
+          </span>
+        ) : (
+          <br class="hidden md:block" />
+        )
+      )
+    }
+  </h2>
+  <p
+    class="text-base lg:w-1/2 lg:px-0"
+    style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)"
+  >
+    <span class="opacity-80">{community.description}</span>
+  </p>
+  <div class="flex w-full flex-wrap gap-3 sm:gap-10 md:justify-center">
+    <div
+      class="community__button flex items-center gap-4"
+      style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)"
+    >
+      <CheckIcon class="size-4" />
+      <span>{community.lists.freeAndOpenSource.title}</span>
+    </div>
+    <div
+      class="community__button flex items-center gap-4"
+      style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)"
+    >
+      <CheckIcon class="size-4" />
+      <span>{community.lists.simpleYetPowerful.title}</span>
+    </div>
+    <div
+      class="community__button flex items-center gap-4"
+      style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)"
+    >
+      <CheckIcon class="size-4" />
+      <span>{community.lists.privateAndAlwaysUpToDate.title}</span>
+    </div>
+  </div>
+  <span class="relative flex w-full max-w-full lg:w-auto lg:max-w-none lg:flex-none">
+    <div
+      class="font-vt323 text-dark/80 absolute left-1/2 top-24 z-10 hidden -translate-x-1/2 flex-col items-center whitespace-nowrap text-5xl lg:flex lg:text-8xl"
+    >
+      <span class="shuffle-text" data-text="Everything you want"> Everything you want </span>
+      <span class="mt-2">
+        1 <span class="shuffle-text" style="color: #E05D44;" data-text="Command">Command</span>
+      </span>
+    </div>
+
+    <Image
+      src={AnalyticsPreview}
+      alt={community.images.community.alt}
+      class="rounded-3xl shadow-md lg:mx-auto dark:opacity-80"
+      style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)"
+    />
+  </span>
+</section>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+  .font-vt323 {
+    font-family: 'VT323', monospace;
+  }
+</style>
+
+<script>
+  import { animate, onScroll, stagger } from 'animejs'
+
+  class ShuffleText {
+    element: HTMLElement
+    originalText: string
+    chars: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=[]{}|;:,.<>?'
+    frameRequest: number | null = null
+    frame: number = 0
+    queue: Array<{ from: string; to: string; start: number; end: number; char?: string }> = []
+    resolve: ((value?: unknown) => void) | null = null
+
+    constructor(element: HTMLElement) {
+      this.element = element
+      this.originalText = element.dataset.text || element.innerText
+    }
+
+    setText(newText: string) {
+      const oldText = this.element.innerText
+      const length = Math.max(oldText.length, newText.length)
+      // eslint-disable-next-line no-promise-executor-return
+      const promise = new Promise(resolve => (this.resolve = resolve))
+      this.queue = []
+      for (let i = 0; i < length; i++) {
+        const from = oldText[i] || ''
+        const to = newText[i] || ''
+        const start = Math.floor(Math.random() * 40)
+        const end = start + Math.floor(Math.random() * 40)
+        this.queue.push({ from, to, start, end })
+      }
+      cancelAnimationFrame(this.frameRequest!)
+      this.frame = 0
+      this.update()
+      return promise
+    }
+
+    update() {
+      let output = ''
+      let complete = 0
+      for (let i = 0, n = this.queue.length; i < n; i++) {
+        let { from, to, start, end, char } = this.queue[i]
+        if (this.frame >= end) {
+          complete++
+          output += to
+        } else if (this.frame >= start) {
+          if (!char || Math.random() < 0.28) {
+            char = this.randomChar()
+            this.queue[i].char = char
+          }
+          output += `<span class="opacity-50">${char}</span>`
+        } else {
+          output += from
+        }
+      }
+      this.element.innerHTML = output
+      if (complete === this.queue.length) {
+        this.resolve && this.resolve()
+      } else {
+        this.frameRequest = requestAnimationFrame(this.update.bind(this))
+        this.frame++
+      }
+    }
+
+    randomChar() {
+      return this.chars[Math.floor(Math.random() * this.chars.length)]
+    }
+  }
+
+  function initAnimations() {
+    const debug = false
+
+    const elements = document.querySelectorAll(
+      '#community h2 span, #community p, #community .community__button, #community img'
+    )
+
+    animate(elements, {
+      opacity: { from: 0.001, to: 1 },
+      translateY: { from: 20, to: 0 },
+      filter: { from: 'blur(4px)', to: 'blur(0px)' },
+      duration: 300,
+      delay: stagger(150),
+      ease: 'cubicBezier(0.25, 0.1, 0.25, 1)',
+      autoplay: onScroll({
+        target: '#community',
+        debug,
+      }),
+    })
+
+    // Init Shuffle Text on Scroll
+    const shuffleElements = document.querySelectorAll('.shuffle-text')
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement
+            // Start with scrambled or empty and then animating to final
+            // For effect, we can just trigger setText with the intended text
+            const shuffler = new ShuffleText(el)
+            shuffler.setText(el.dataset.text || el.innerText)
+            observer.unobserve(el)
+          }
+        })
+      },
+      { threshold: 0.5 }
+    )
+
+    shuffleElements.forEach(el => observer.observe(el))
+  }
+  initAnimations()
+</script>

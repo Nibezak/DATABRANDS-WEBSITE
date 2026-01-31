@@ -1,0 +1,153 @@
+---
+import Button from '~/components/Button.astro'
+import Title from '~/components/Title.astro'
+import ArrowRightIcon from '~/icons/ArrowRightIcon.astro'
+import { getLocale, getPath, getUI } from '~/utils/i18n'
+import SocialMediaStrip from './SocialMediaStrip.astro'
+import Video from './Video.astro'
+
+const locale = getLocale(Astro)
+
+const getLocalePath = getPath(locale)
+
+const {
+  routes: {
+    index: { hero },
+  },
+} = getUI(locale)
+---
+
+<header
+  id="header"
+  class="flex w-full flex-col items-center gap-4 py-8 text-center lg:gap-8 lg:py-16"
+>
+  <div class="flex h-full flex-col items-center justify-center gap-6 md:gap-8">
+    <div
+      class="hero-pill mb-4 inline-flex items-center justify-center rounded-none border border-black bg-white px-4 py-1.5 text-sm font-medium text-black shadow-sm md:mb-6"
+      style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)"
+    >
+      <span class="px-2 py-0.5">Your brand's operating system</span>
+    </div>
+    <div>
+      <Title
+        class="relative px-6 text-center text-4xl leading-tight tracking-tight md:text-6xl lg:px-0 lg:text-8xl"
+      >
+        {
+          hero.title.map((title, i) =>
+            title.text !== '\n' ? (
+              <b
+                key={i}
+                class:list={[
+                  'font-normal md:whitespace-nowrap',
+                  title.highlight && 'mx-1 rounded-none bg-dark px-3 py-1 text-white',
+                  title.underline && 'hero-vibes-underline text-coral',
+                ]}
+                style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)"
+              >
+                {title.text}
+              </b>
+            ) : (
+              <br key={i} class="hidden md:block" />
+            )
+          )
+        }
+      </Title>
+      <p
+        class="mt-6 px-6 text-center lg:px-0"
+        style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)"
+      >
+        {hero.description[0]}
+      </p>
+    </div>
+    <div
+      class="flex w-full flex-col items-center justify-center gap-3 px-6 sm:gap-6 md:w-fit md:flex-row md:px-0"
+    >
+      <div style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)">
+        <Button
+          class="w-fit"
+          href="https://app.trydatabrands.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          isPrimary
+        >
+          {hero.buttons.support}
+          <ArrowRightIcon class="size-4" />
+        </Button>
+      </div>
+      <div style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)">
+        <Button class="trigger-request-access w-fit" href="#">
+          {hero.buttons.beta}
+        </Button>
+      </div>
+    </div>
+  </div>
+  <SocialMediaStrip style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)" />
+</header>
+<div
+  class="hero-video-container mx-auto mt-8 aspect-video w-full max-w-screen-lg overflow-hidden rounded-xl shadow-2xl"
+  style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)"
+>
+  <Video
+    name="intro-video"
+    autoplay
+    loop
+    muted
+    playsinline
+    preload="none"
+    class="h-full w-full !max-w-none scale-[1.1] object-cover"
+    style="transform-origin: top;"
+  />
+</div>
+
+<script>
+  import { animate, onScroll, stagger } from 'animejs'
+
+  function initAnimations() {
+    const debug = false
+
+    const elements = document.querySelectorAll(
+      '#header .hero-pill, #header h1 b, #header p, #header div:has(a), .hero-video-container, #header ul'
+    )
+
+    animate(elements, {
+      // @ts-expect-error - element is HTMLElement
+      opacity: element => {
+        if (element.tagName === 'UL') {
+          return { from: 0.001, to: 0.8 }
+        }
+        return { from: 0.001, to: 1 }
+      },
+      translateY: { from: 20, to: 0 },
+      filter: { from: 'blur(4px)', to: 'blur(0px)' },
+      duration: 300,
+      delay: stagger(150),
+      ease: 'cubicBezier(0.25, 0.1, 0.25, 1)',
+      autoplay: onScroll({
+        target: '#header',
+        debug,
+      }),
+    })
+  }
+  initAnimations()
+</script>
+
+<style>
+  /* Stylish pen-like underline for "vibes" */
+  .hero-vibes-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-vibes-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -0.2em;
+    height: 0.3em;
+    background-image: url("data:image/svg+xml,%3Csvg width='200' height='20' viewBox='0 0 200 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 14 C 40 18, 70 8, 110 12 S 180 18, 194 10' stroke='%23F76F53' stroke-width='3' fill='none' stroke-linecap='round' /%3E%3C/svg%3E");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+</style>

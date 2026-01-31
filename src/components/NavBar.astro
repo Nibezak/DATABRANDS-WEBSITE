@@ -1,0 +1,254 @@
+---
+import { Astronav, Dropdown, DropdownItems, MenuItems } from 'astro-navbar'
+import Button from '~/components/Button.astro'
+import ArrowRightIcon from '~/icons/ArrowRightIcon.astro'
+import ChevronDownIcon from '~/icons/ChevronDownIcon.astro'
+import DownloadIcon from '~/icons/DownloadIcon.astro'
+import MenuIcon from '~/icons/MenuIcon.astro'
+import { getLocale, getPath, getUI } from '~/utils/i18n'
+import Logo from './Logo.astro'
+import MobileMenu from './MobileMenu.astro'
+import ThemeSwitch from './ThemeSwitch.astro'
+
+const locale = getLocale(Astro)
+const getLocalePath = getPath(locale)
+const {
+  components: {
+    nav: { brand, menu },
+  },
+} = getUI(locale)
+---
+
+<!-- Desktop Navigation -->
+<Astronav>
+  <MenuItems
+    class="container relative z-20 grid w-full grid-cols-2 items-center gap-2 bg-paper py-3 lg:grid lg:grid-cols-[auto_1fr_auto] lg:py-6"
+  >
+    <a class="flex items-center gap-2 text-2xl font-bold" href={getLocalePath('/')}>
+      <Logo class="text-dark" />
+      <span class="brand-shuffle" data-text={brand}>{brand}</span>
+    </a>
+    <div
+      class="hidden items-center gap-6 place-self-center text-xs sm:text-sm lg:flex lg:text-base"
+    >
+      <a class="hidden items-center lg:block" href="https://discord.gg/4NSueBdW" target="_blank">
+        <span>{menu.discord}</span>
+      </a>
+      <Dropdown class="group">
+        <button class="flex items-center">
+          <span>{menu.usefulLinks}</span>
+          <ChevronDownIcon
+            class="size-4 transform transition-transform duration-200 group-open:rotate-180 md:ml-2"
+          />
+        </button>
+        <DropdownItems>
+          <div class="navbar-dropdown !grid-cols-1 gap-1">
+            <a class="dropdown-item" href={getLocalePath('/about')}>
+              <div class="dropdown-title">{menu.aboutUs}</div>
+              <div class="dropdown-description">
+                {menu.aboutUsDesc}
+              </div>
+            </a>
+            <a class="dropdown-item" href="https://youtube.com" target="_blank">
+              <div class="dropdown-title">{menu.watchVideos}</div>
+              <div class="dropdown-description">
+                {menu.watchVideosDesc}
+              </div>
+            </a>
+          </div>
+        </DropdownItems>
+      </Dropdown>
+      <a
+        class="trigger-request-access hidden items-center rounded-none bg-dark px-6 py-2 text-paper transition-opacity hover:opacity-90 lg:block"
+        href="#"
+      >
+        <span>{menu.download}</span>
+      </a>
+    </div>
+    <div class="flex items-center gap-2 place-self-end lg:gap-4">
+      <div id="theme-switcher">
+        <ThemeSwitch label="Toggle theme" />
+      </div>
+      <Button
+        href="https://app.trydatabrands.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden lg:flex"
+        isPrimary
+      >
+        <span class="hidden items-center gap-2 lg:flex">
+          {menu.login}
+          <ArrowRightIcon class="size-4" />
+        </span>
+        <span class="flex items-center gap-2 lg:hidden">
+          <DownloadIcon class="size-4" />
+        </span>
+      </Button>
+      <label
+        for="mobile-menu-toggle"
+        class="cursor-pointer p-2 text-dark lg:hidden"
+        aria-label="Open menu"
+      >
+        <MenuIcon class="h-6 w-6" />
+      </label>
+    </div>
+  </MenuItems>
+</Astronav>
+
+<!-- Mobile Hamburger Menu Content -->
+<MobileMenu />
+
+<style>
+  .navbar-dropdown {
+    @apply absolute left-1/2 mt-2 grid !-translate-x-1/2 !transform grid-cols-2 gap-2 rounded-lg border-2 border-dark bg-paper p-3 shadow-sm;
+    & .dropdown-item {
+      @apply flex cursor-pointer select-none flex-col gap-2 rounded-lg p-4 transition-colors duration-200;
+
+      &:hover {
+        @apply bg-muted;
+      }
+
+      & .dropdown-title {
+        @apply font-bold;
+      }
+
+      & .dropdown-description {
+        @apply text-sm;
+      }
+    }
+  }
+</style>
+<style is:global>
+  #theme-switcher * {
+    @apply text-dark;
+  }
+</style>
+
+<script>
+  class ShuffleText {
+    element: HTMLElement
+    originalText: string
+    chars: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+-=[]{}|;:,.<>?'
+    frameRequest: number | null = null
+    frame: number = 0
+    queue: Array<{ from: string; to: string; start: number; end: number; char?: string }> = []
+    resolve: ((value?: unknown) => void) | null = null
+
+    constructor(element: HTMLElement) {
+      this.element = element
+      this.originalText = element.dataset.text || element.innerText
+    }
+
+    setText(newText: string) {
+      const oldText = this.element.innerText
+      const length = Math.max(oldText.length, newText.length)
+      const promise = new Promise(resolve => (this.resolve = resolve))
+      this.queue = []
+      for (let i = 0; i < length; i++) {
+        const from = oldText[i] || ''
+        const to = newText[i] || ''
+        // Medium speed: range 100-150 frames (approx 2.5s at 60fps)
+        const start = Math.floor(Math.random() * 100)
+        const end = start + Math.floor(Math.random() * 50)
+        this.queue.push({ from, to, start, end })
+      }
+      cancelAnimationFrame(this.frameRequest!)
+      this.frame = 0
+      this.update()
+      return promise
+    }
+
+    update() {
+      let output = ''
+      let complete = 0
+      for (let i = 0, n = this.queue.length; i < n; i++) {
+        let { from, to, start, end, char } = this.queue[i]
+        if (this.frame >= end) {
+          complete++
+          output += to
+        } else if (this.frame >= start) {
+          // Medium flicker: update char every ~10 frames
+          if (!char || Math.random() < 0.1) {
+            char = this.randomChar()
+            this.queue[i].char = char
+          }
+          output += `<span class="opacity-50">${char}</span>`
+        } else {
+          output += from
+        }
+      }
+      this.element.innerHTML = output
+      if (complete === this.queue.length) {
+        this.resolve && this.resolve()
+      } else {
+        this.frameRequest = requestAnimationFrame(this.update.bind(this))
+        this.frame++
+      }
+    }
+
+    randomChar() {
+      return this.chars[Math.floor(Math.random() * this.chars.length)]
+    }
+  }
+
+  class ShuffleLogo {
+    elements: NodeListOf<SVGElement>
+    // Vibrant colors matching the brand vibes + standard Rubik's cube colors
+    colors: string[] = [
+      '#F76F53',
+      '#E05D44',
+      '#FFFFFF',
+      '#FFD700',
+      '#4CAF50',
+      '#2196F3',
+      '#9C27B0',
+      '#FF5722',
+    ]
+    interval: number | null = null
+    startTime: number = 0
+    duration: number = 2500
+
+    constructor(svgElement: HTMLElement) {
+      this.elements = svgElement.querySelectorAll('line, circle')
+    }
+
+    start() {
+      this.startTime = Date.now()
+      this.interval = window.setInterval(() => {
+        if (Date.now() - this.startTime > this.duration) {
+          this.stop()
+          return
+        }
+        this.elements.forEach(el => {
+          const color = this.colors[Math.floor(Math.random() * this.colors.length)]
+          if (el.tagName === 'line') el.style.stroke = color
+          if (el.tagName === 'circle') el.style.fill = color
+        })
+      }, 70) // Faster color cycle (70ms)
+    }
+
+    stop() {
+      if (this.interval) window.clearInterval(this.interval)
+      this.elements.forEach(el => {
+        el.style.stroke = ''
+        el.style.fill = ''
+      })
+    }
+  }
+
+  // Trigger on load
+  document.addEventListener('DOMContentLoaded', () => {
+    const brandElement = document.querySelector('.brand-shuffle')
+    if (brandElement) {
+      const shuffler = new ShuffleText(brandElement as HTMLElement)
+      shuffler.setText(brandElement.getAttribute('data-text') || brandElement.textContent || '')
+    }
+
+    // Find the logo SVG which is a sibling or near the brand text
+    const logoSvg = document.querySelector('a[href*="/"] svg')
+    if (logoSvg) {
+      const logoShuffler = new ShuffleLogo(logoSvg as HTMLElement)
+      logoShuffler.start()
+    }
+  })
+</script>

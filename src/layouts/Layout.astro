@@ -1,0 +1,168 @@
+---
+interface Props {
+  title: string
+  description?: string
+  ogImage?: string
+  isHome?: boolean
+  redirect?: string
+}
+
+const { title, description, ogImage, isHome, redirect } = Astro.props
+const defaultDescription =
+  'DATABRANDS.ai is built for speed, security, and true privacy. Download now to enjoy a beautifully-designed, distraction-free web experience packed with features.'
+import '@fontsource/geist-sans/400.css'
+import '@fontsource/geist-sans/500.css'
+import '@fontsource/geist-sans/600.css'
+import '@fontsource/space-mono/400.css'
+import '@fontsource/space-mono/700.css'
+import '@radix-ui/colors/sage.css'
+import '@radix-ui/colors/sage-dark.css'
+import '@radix-ui/colors/teal.css'
+
+import Footer from '~/components/Footer.astro'
+import NavBar from '~/components/NavBar.astro'
+import RequestAccessModal from '~/components/RequestAccessModal.astro'
+import { getLocale } from '~/utils/i18n'
+const locale = getLocale(Astro)
+---
+
+<script is:inline data-cfasync="false">
+  // Force dark mode
+  const theme = 'dark'
+  document.documentElement.setAttribute('data-theme', 'dark')
+  document.documentElement.classList.add('dark')
+  if (typeof localStorage !== 'undefined') {
+    localStorage.setItem('theme', 'dark')
+  }
+</script>
+
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    {redirect ? <meta http-equiv="refresh" content={`0;url=${redirect}`} /> : null}
+    <meta name="description" content={description ?? defaultDescription} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-0.xml" />
+
+    {
+      isHome && (
+        <>
+          {/* Injecting schema to homepage only (for SEO) */}
+          <script
+            is:inline
+            type="application/ld+json"
+            set:html={JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'DATABRANDS.ai',
+              url: 'https://databrand.ai/',
+            })}
+          />
+        </>
+      )
+    }
+
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="theme-color" content="#3d4540" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:description" content={description ?? defaultDescription} />
+    <meta property="og:color" content="#3d4540" />
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- RSS Feed -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="DATABRANDS Release Notes"
+      href={`${Astro.url.origin}/feed.xml`}
+    />
+
+    <script>
+      // eslint-disable-next-line no-console
+      console.log(
+        '%c✌️ DATABRANDS.ai%c\nWelcome to your Interface to Intelligence!',
+        'filter: invert(1); font-size: 28px; font-weight: bolder; font-family: "Geist Sans"; margin-top: 20px; margin-bottom: 8px;',
+        'color: #3d4540; font-size: 16px; font-family: "Geist Sans"; margin-bottom: 20px;'
+      )
+    </script>
+  </head>
+  <body
+    class="min-h-[max(100dvh,_64rem)] overflow-x-hidden text-balance bg-paper font-['Geist_Sans'] text-dark"
+  >
+    <NavBar />
+    <slot />
+    <Footer />
+    <RequestAccessModal />
+  </body>
+</html>
+<style is:global>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    /* Mapped from ground-0v2 globals.css */
+    --zen-paper: #ffffff;
+    --zen-dark: #000000;
+    --zen-muted: var(--sage-3);
+    --zen-subtle: var(--sage-2);
+
+    /* Custom Cursors */
+    cursor: url('/design-cursor-default.svg'), auto !important;
+
+    /* Expose Sage colors for Tailwind if needed directly via variable usage */
+  }
+
+  [data-theme='dark'] {
+    --zen-paper: var(--sage-1);
+    --zen-dark: var(--sage-12);
+    --zen-muted: var(--sage-3);
+    --zen-subtle: var(--sage-2);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body,
+  body > * {
+    font-family: 'Geist Sans', sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 500;
+    font-variation-settings: 'width' 100;
+  }
+
+  a,
+  button,
+  select,
+  [role='button'] {
+    /* Reverted to default pointer as per user request */
+    cursor: pointer !important;
+  }
+
+  input,
+  textarea {
+    cursor:
+      url('/design-cursor-text.svg') 16 16,
+      text !important;
+  }
+</style>
+<style is:global>
+  /* Declare a custom CSS class to make the icon look right */
+  .svg-inline--fa {
+    overflow: visible;
+    box-sizing: content-box;
+    display: inline-block;
+    height: 1em;
+    vertical-align: -0.125em;
+  }
+</style>
