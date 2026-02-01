@@ -63,7 +63,7 @@ const {
       class="flex w-full flex-col items-center justify-center gap-3 px-6 sm:gap-6 md:w-fit md:flex-row md:px-0"
     >
       {
-        /* 
+        /*
       <div style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)">
         <Button
           class="w-fit"
@@ -79,10 +79,20 @@ const {
       */
       }
       <div style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)">
+        <Button class="trigger-request-access w-fit" href="#" isPrimary>
+          {hero.buttons.beta}
+          <ArrowRightIcon class="size-4" />
+        </Button>
+      </div>
+      {
+        /*
+      <div style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)">
         <Button class="trigger-request-access w-fit" href="#">
           {hero.buttons.beta}
         </Button>
       </div>
+      */
+      }
     </div>
   </div>
   <SocialMediaStrip style="transform: translateY(20px); opacity: 0.001; filter: blur(4px)" />
