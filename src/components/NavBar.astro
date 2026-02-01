@@ -58,26 +58,24 @@ const {
           </div>
         </DropdownItems>
       </Dropdown>
+      {
+        /* 
       <a
         class="trigger-request-access hidden items-center rounded-none bg-dark px-6 py-2 text-paper transition-opacity hover:opacity-90 lg:block"
         href="#"
       >
         <span>{menu.download}</span>
-      </a>
+      </a> 
+      */
+      }
     </div>
     <div class="flex items-center gap-2 place-self-end lg:gap-4">
       <div id="theme-switcher">
         <ThemeSwitch label="Toggle theme" />
       </div>
-      <Button
-        href="https://app.trydatabrands.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hidden lg:flex"
-        isPrimary
-      >
+      <Button href="#" class="trigger-request-access hidden lg:flex">
         <span class="hidden items-center gap-2 lg:flex">
-          {menu.login}
+          {menu.download}
           <ArrowRightIcon class="size-4" />
         </span>
         <span class="flex items-center gap-2 lg:hidden">
