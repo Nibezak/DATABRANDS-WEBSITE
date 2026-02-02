@@ -48,10 +48,10 @@ importers:
         specifier: 5.2.10
         version: 5.2.10
       '@fontsource/geist-sans':
-        specifier: ^5.2.5
+        specifier: 5.2.5
         version: 5.2.5
       '@fontsource/space-mono':
-        specifier: ^5.2.9
+        specifier: 5.2.9
         version: 5.2.9
       '@fortawesome/fontawesome-svg-core':
         specifier: 6.7.2
@@ -63,7 +63,7 @@ importers:
         specifier: 6.7.2
         version: 6.7.2
       '@radix-ui/colors':
-        specifier: ^3.0.0
+        specifier: 3.0.0
         version: 3.0.0
       '@types/react':
         specifier: 19.1.8
